@@ -1,7 +1,7 @@
 {
   "name": "梦想综合搜索",
   "description": "一款简洁的综合搜索扩展，可自定义右键搜索和搜索按钮。",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "manifest_version": 3,
   "icons": {
 	"128": "128.png"
