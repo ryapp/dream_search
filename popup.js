@@ -44,7 +44,7 @@ function bindEvents() {
 
 	// 绑定搜索图标点击事件
 	butEl.onclick = function () {
-		let but = butBox.querySelector('.dmx_button')
+		let but = document.querySelector('.dmx_button')
 		but && but.click()
 	}
 
