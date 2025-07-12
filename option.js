@@ -1,12 +1,12 @@
 function bindEvents() {
-	let nameEl = document.querySelectorAll('[name]')
+	let namesEl = document.querySelectorAll('[name]')
 	let widthEl = document.getElementById('isPopupSelected')
 	let saveEl = document.getElementById('save_option')
 	let resetEl = document.getElementById('reset_option')
 
 	// 遍历赋值
 	if (window.CONF) {
-		nameEl.forEach(el => {
+		namesEl.forEach(el => {
 			let val = window.CONF[el.name] || ''
 			if (el.type === 'checkbox') {
 				if (val) el.checked = true
@@ -25,7 +25,7 @@ function bindEvents() {
 	// 点击保存
 	saveEl.onclick = function () {
 		let config = {}
-		nameEl.forEach(el => {
+		namesEl.forEach(el => {
 			if (el.type === 'checkbox') {
 				config[el.name] = el.checked
 			} else {
