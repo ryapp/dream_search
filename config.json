@@ -1,0 +1,6 @@
+{
+  "searchList": "百度搜索|https://www.baidu.com/s?wd={q}\n谷歌搜索|https://www.google.com/search?q={q}\n必应搜索|https://cn.bing.com/search?q={q}\n360搜索|https://www.so.com/s?q={q}\n搜狗搜索|https://www.sogou.com/web?query={q}\n维基百科|https://zh.wikipedia.org/w/index.php?search={q}\n百度百科|https://baike.baidu.com/search/word?word={q}",
+  "menuList": "百度搜索|https://www.baidu.com/s?wd={q}",
+  "popupWidth": 640,
+  "isPopupSelected": true
+}

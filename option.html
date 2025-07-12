@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <title>设置</title>
@@ -10,25 +10,25 @@
     <div class="option">
         <div class="title"><b>启用搜索</b></div>
         <div class="case">
-            <textarea name="searchText" class="dmx_input" rows="8"></textarea>
+            <textarea name="searchList" class="dmx_input" rows="8"></textarea>
         </div>
     </div>
     <div class="option">
         <div class="title"><b>右键菜单</b></div>
         <div class="case">
-            <textarea name="menuText" class="dmx_input" rows="3"></textarea>
+            <textarea name="menuList" class="dmx_input" rows="3"></textarea>
         </div>
     </div>
     <div class="option">
         <div class="title"><b>显示宽度</b></div>
         <div class="case">
-            <input name="searchWidth" class="dmx_input show_width" type="number" min="360" max="760">
+            <input name="popupWidth" class="dmx_input show_width" type="number" min="360" max="760">
         </div>
     </div>
     <div class="option">
         <div class="title"><b>其他设置</b></div>
         <div class="case">
-            <label><input type="checkbox" name="selectAll" value="true"></label>
+            <label><input id="isPopupSelected" name="isPopupSelected" type="checkbox"></label>
             <span>打开搜索面板时，自动全选</span>
         </div>
     </div>
