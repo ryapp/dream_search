@@ -55,7 +55,7 @@ function initMenu(menuList) {
 
 function main() {
 	chrome.storage.local.get('config', (result) => {
-		if (result.config) {
+		if (result?.config) {
 			const conf = JSON.parse(result.config)
 			if (conf.menuList) {
 				initMenu(conf.menuList)

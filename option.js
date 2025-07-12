@@ -53,7 +53,7 @@ function bindEvents() {
 
 function main() {
 	chrome.storage.local.get('config', (result) => {
-		if (result.config) {
+		if (result?.config) {
 			try {
 				window.CONF = JSON.parse(result.config);
 			} catch (e) {
