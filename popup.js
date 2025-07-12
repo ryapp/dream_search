@@ -74,10 +74,10 @@ function bindEvents() {
 		if (result.searchWord) {
 			inpEl.value = result.searchWord
 			rmEl.style.display = 'block'
+
+			window.CONF.isPopupSelected ? inpEl.select() : inpEl.focus()
 		}
 	})
-
-	window.CONF.isPopupSelected ? inpEl.select() : inpEl.focus()
 
 	// 设置搜索框宽度
 	document.querySelector('.search_main').style.width = (window.CONF.popupWidth || 640) + 'px'
@@ -108,7 +108,6 @@ function main() {
 			.then(conf => {
 				window.CONF = conf;
 				initButtonList(conf.searchList)
-				chrome.storage.local.set({config: JSON.stringify(conf)})
 			})
 			.catch(err => {
 				console.error('Error loading search list:', err)
