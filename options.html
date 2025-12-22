@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<title>设置</title>
+	<link rel="stylesheet" href="main.css">
+</head>
+<body>
+<div class="main">
+	<div class="option">
+		<div class="title"><label for="searchItems"><b>搜索按钮</b></label></div>
+		<div class="case">
+			<textarea id="searchItems" class="dmx_input" rows="8"></textarea>
+		</div>
+	</div>
+	<div class="option">
+		<div class="title"><label for="menuItems"><b>右键菜单</b></label></div>
+		<div class="case">
+			<textarea id="menuItems" class="dmx_input" rows="3"></textarea>
+		</div>
+	</div>
+	<div class="option">
+		<div class="title"><label for="searchBoxWidth"><b>搜索框宽度</b></label></div>
+		<div class="case">
+			<input id="searchBoxWidth" class="dmx_input show_width" type="number" min="360" max="760">
+		</div>
+	</div>
+	<div class="option">
+		<div class="title"><label for="autoFocus"><b>其他设置</b></label></div>
+		<div class="case">
+			<label><input id="autoFocus" type="checkbox"></label>
+			<span>打开搜索面板时，自动全选</span>
+		</div>
+	</div>
+	<div class="option_but fx">
+		<div id="saveBut" class="dmx_button">保存设置</div>
+		<div id="resetBut" class="dmx_button dmx_button_default">恢复默认</div>
+	</div>
+	<div class="option explain">
+		<div class="title"><b>设置说明</b></div>
+		<div class="case">
+			1、每行一条，“|”分隔，前面为名称，后面为搜索链接，{s} 代表搜索关键词。<br>
+			2、排列顺序和放置顺序一致，第一排为第一个，第二排为第二个，以此类推。<br>
+			3、右键菜单，如果为多条，自动变成二级菜单。建议设置最常用的即可，太多了混乱。
+		</div>
+	</div>
+</div>
+</body>
+<script type="text/javascript" src="utils.js"></script>
+<script type="text/javascript" src="options.js"></script>
+</html>

@@ -1,0 +1,44 @@
+{
+  "searchItems": [
+	{
+	  "title": "百度搜索",
+	  "url": "https://www.baidu.com/s?wd={s}"
+	},
+	{
+	  "title": "百度AI",
+	  "url": "https://chat.baidu.com/search?word={s}"
+	},
+	{
+	  "title": "谷歌搜索",
+	  "url": "https://www.google.com/search?q={s}"
+	},
+	{
+	  "title": "必应搜索",
+	  "url": "https://cn.bing.com/search?q={s}"
+	},
+	{
+	  "title": "360搜索",
+	  "url": "https://www.so.com/s?q={s}"
+	},
+	{
+	  "title": "搜狗搜索",
+	  "url": "https://www.sogou.com/web?query={s}"
+	},
+	{
+	  "title": "维基百科",
+	  "url": "https://zh.wikipedia.org/w/index.php?search={s}"
+	},
+	{
+	  "title": "百度百科",
+	  "url": "https://baike.baidu.com/search/word?word={s}"
+	}
+  ],
+  "menuItems": [
+	{
+	  "title": "百度搜索",
+	  "url": "https://www.baidu.com/s?wd={s}"
+	}
+  ],
+  "searchBoxWidth": 640,
+  "autoFocus": true
+}

@@ -1,87 +1,60 @@
-function listFormat(s) {
-	if (typeof s !== 'string') return [];
+// 通用写法，支持 Chrome, Edge, Firefox, Safari
+importScripts('utils.js');
 
-	return s
-		.trim()
-		.split('\n')
-		.map((line, index) => {
-			const [rawName, rawUrl] = line.split('|');
-			const name = rawName?.trim();
-			const url = rawUrl?.trim();
-			if (name && url) {
-				return {key: index, title: name, url};
-			}
-			return null;
+// 更新右键菜单
+function updateContextMenu() {
+	// 先清空，防止 ID 重复冲突
+	chrome.contextMenus.removeAll(async () => {
+		const conf = await initConf();
+		conf.menuItems.forEach((item, key) => {
+			// 创建访问首页
+			chrome.contextMenus.create({
+				id: 'page-' + key,
+				title: `${item.title}首页`,
+				contexts: ['page'],
+			})
+
+			// 创建搜索菜单
+			chrome.contextMenus.create({
+				id: 'selection-' + key,
+				title: `使用${item.title}“%s”`,
+				contexts: ['selection'],
+			})
 		})
-		.filter(Boolean);
-}
-
-function addMenu(v) {
-	// 创建访问首页
-	chrome.contextMenus.create({
-		id: v.key + '_page',
-		title: v.title + '首页',
-		contexts: ['page'],
-	})
-
-	chrome.contextMenus.onClicked.addListener(function (info) {
-		if (info.menuItemId === v.key + '_page') {
-			const url = (new URL(v.url)).origin;
-			chrome.tabs.create({url})
-		}
-	});
-
-	// 创建搜索菜单
-	chrome.contextMenus.create({
-		id: v.key + '_selection',
-		title: v.title + '“%s”',
-		contexts: ['selection'],
-	})
-
-	chrome.contextMenus.onClicked.addListener(function (info) {
-		if (info.menuItemId === v.key + '_selection') {
-			const url = v.url.replace('{q}', decodeURIComponent(info.selectionText));
-			chrome.tabs.create({url})
-		}
 	});
 }
 
-function initMenu(menuList) {
-	chrome.contextMenus.removeAll()
-	listFormat(menuList).forEach(v => {
-		addMenu(v)
-	})
-}
+chrome.runtime.onInstalled.addListener(updateContextMenu); // “安装”插件时
+chrome.runtime.onStartup.addListener(updateContextMenu); // 打开浏览器时
 
-function main() {
-	chrome.storage.local.get('config', (result) => {
-		if (result?.config) {
-			const conf = JSON.parse(result.config)
-			if (conf.menuList) {
-				initMenu(conf.menuList)
-				return
-			}
-		}
+// 配置修改后更新右键菜单
+chrome.storage.onChanged.addListener((changes) => {
+	if (changes.conf) updateContextMenu();
+});
 
-		fetch(chrome.runtime.getURL('config.json'))
-			.then(response => response.json())
-			.then(conf => {
-				initMenu(conf.menuList)
-				chrome.storage.local.set({config: JSON.stringify(conf)})
-			})
-			.catch(err => {
-				console.error('Error loading search list:', err)
-			})
-	});
+// 监听点击右键菜单
+chrome.contextMenus.onClicked.addListener(async (info) => {
+	const arr = info.menuItemId.split('-');
+	if (arr.length !== 2) return;
 
-	// 监听消息
-	chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-		if (message.type === "INIT_MENU") {
-			main() // 重新初始化菜单
-			sendResponse();
-		}
-		return true;
-	});
-}
+	const type = arr[0];
+	const key = Number(arr[1]);
 
-main()
+	if (type === 'page') {
+		const conf = await initConf();
+		const item = conf.menuItems[key];
+		if (!item) return;
+
+		// 打开首页
+		const url = (new URL(item.url)).origin;
+		chrome.tabs.create({url})
+	} else if (type === 'selection' && info.selectionText) {
+		const conf = await initConf();
+		const item = conf.menuItems[key];
+		if (!item) return;
+
+		// 打开搜索页
+		const url = item.url.replace('{s}', encodeURIComponent(info.selectionText));
+		chrome.tabs.create({url})
+	}
+});
