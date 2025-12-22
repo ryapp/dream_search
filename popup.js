@@ -28,12 +28,11 @@
 
 	// 读取上次搜索关键词
 	chrome.storage.local.get('searchInput', (result) => {
-		if (result.searchInput) {
-			searchInputEl.value = result.searchInput;
-			searchInputEl.focus(); // 获取焦点
-			if (conf.autoFocus) searchInputEl.select(); // 是否自动选中
-			clearButEl.style.display = 'block'; // 显示清空按钮
-		}
+		const text = result.searchInput || '';
+		if (text) searchInputEl.value = text;
+		searchInputEl.focus(); // 获取焦点
+		if (conf.autoFocus) searchInputEl.select(); // 是否自动选中
+		clearButEl.style.display = text ? 'block' : 'none';  // 是否显示清空按钮
 	});
 
 	// 点击搜索
