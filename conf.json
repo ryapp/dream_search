@@ -39,6 +39,6 @@
 	  "url": "https://www.baidu.com/s?wd={s}"
 	}
   ],
-  "searchBoxWidth": 640,
+  "searchBoxWidth": 720,
   "autoFocus": true
 }

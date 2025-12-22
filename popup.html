@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <title>Popup</title>
-    <link rel="stylesheet" href="main.css">
+	<meta charset="UTF-8">
+	<title>Popup</title>
+	<link rel="stylesheet" href="main.css">
 </head>
 <body>
 <div class="search_main">
-    <div class="search_box dmx_input">
-        <input id="search_input" type="text" maxlength="100" autocomplete="off">
-        <div id="search_remove"></div>
-        <div id="search_but"></div>
-    </div>
-    <div id="but_box" class="but_box fx"></div>
+	<div class="search_box dmx_input">
+		<label for="searchInput">
+			<input id="searchInput" class="search-input" type="text" maxlength="100" autocomplete="off">
+		</label>
+		<div id="clearBut" class="clear-but"></div>
+		<div id="searchBut" class="search-but"></div>
+	</div>
+	<div id="searchButBox" class="but_box fx"></div>
 </div>
 </body>
+<script type="text/javascript" src="utils.js"></script>
 <script type="text/javascript" src="popup.js"></script>
 </html>
