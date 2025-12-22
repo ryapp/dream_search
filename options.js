@@ -17,7 +17,7 @@
 	// 限制搜索框宽度
 	searchBoxWidthEl.onchange = function () {
 		let width = this.value;
-		this.value = width < 360 ? 360 : width > 960 ? 960 : width;
+		this.value = width < 360 ? 360 : width > 780 ? 780 : width;
 	}
 
 	// 保存
