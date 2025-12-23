@@ -10,6 +10,10 @@ function $(id) {
 	return document.getElementById(id)
 }
 
+function searchUrl(url, text) {
+	return url.replace('{s}', encodeURIComponent(text));
+}
+
 function arrToStr(arr) {
 	let s = ''
 	arr.forEach(v => {

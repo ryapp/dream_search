@@ -22,7 +22,7 @@
 	document.querySelectorAll('.dmx_button').forEach(el => {
 		el.addEventListener('click', function () {
 			let text = searchInputEl.value.trim();
-			if (text) chrome.tabs.create({url: el.dataset.url.replace('{s}', encodeURIComponent(text))});
+			if (text) chrome.tabs.create({url: searchUrl(el.dataset.url, text)});
 		});
 	});
 

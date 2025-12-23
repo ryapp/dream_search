@@ -58,7 +58,7 @@ chrome.contextMenus.onClicked.addListener(async (info) => {
 		if (!item) return;
 
 		// 打开搜索页
-		const url = item.url.replace('{s}', encodeURIComponent(info.selectionText));
+		const url = searchUrl(item.url, info.selectionText);
 		chrome.tabs.create({url})
 	}
 });
