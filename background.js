@@ -7,7 +7,7 @@ async function updateContextMenu() {
 	if (chrome.runtime.lastError) console.warn("清理菜单时出错:", chrome.runtime.lastError.message);
 
 	const conf = await initConf();
-	conf.menuItems.forEach((item, key) => {
+	for (const [key, item] of conf.menuItems.entries()) {
 		// 创建访问首页
 		chrome.contextMenus.create({
 			id: 'page-' + key,
@@ -25,7 +25,7 @@ async function updateContextMenu() {
 		}, () => {
 			if (chrome.runtime.lastError) console.warn("菜单ID重复(selection):", chrome.runtime.lastError.message);
 		});
-	})
+	}
 }
 
 chrome.runtime.onInstalled.addListener(updateContextMenu); // “安装”插件时
