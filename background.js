@@ -2,26 +2,30 @@
 importScripts('utils.js');
 
 // 更新右键菜单
-function updateContextMenu() {
-	// 先清空，防止 ID 重复冲突
-	chrome.contextMenus.removeAll(async () => {
-		const conf = await initConf();
-		conf.menuItems.forEach((item, key) => {
-			// 创建访问首页
-			chrome.contextMenus.create({
-				id: 'page-' + key,
-				title: `${item.title}首页`,
-				contexts: ['page'],
-			})
+async function updateContextMenu() {
+	await chrome.contextMenus.removeAll(); // 先清空，防止 ID 重复冲突
+	if (chrome.runtime.lastError) console.warn("清理菜单时出错:", chrome.runtime.lastError.message);
 
-			// 创建搜索菜单
-			chrome.contextMenus.create({
-				id: 'selection-' + key,
-				title: `使用${item.title}“%s”`,
-				contexts: ['selection'],
-			})
-		})
-	});
+	const conf = await initConf();
+	conf.menuItems.forEach((item, key) => {
+		// 创建访问首页
+		chrome.contextMenus.create({
+			id: 'page-' + key,
+			title: `${item.title}首页`,
+			contexts: ['page'],
+		}, () => {
+			if (chrome.runtime.lastError) console.warn("菜单ID重复(page):", chrome.runtime.lastError.message);
+		});
+
+		// 创建搜索菜单
+		chrome.contextMenus.create({
+			id: 'selection-' + key,
+			title: `使用${item.title}“%s”`,
+			contexts: ['selection'],
+		}, () => {
+			if (chrome.runtime.lastError) console.warn("菜单ID重复(selection):", chrome.runtime.lastError.message);
+		});
+	})
 }
 
 chrome.runtime.onInstalled.addListener(updateContextMenu); // “安装”插件时
